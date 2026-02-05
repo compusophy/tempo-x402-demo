@@ -6,7 +6,7 @@ Demonstrates the HTTP 402 Payment Required flow on the Tempo blockchain:
 1. Request a protected endpoint
 2. Receive 402 response with payment requirements
 3. Sign an EIP-712 payment authorization
-4. Retry with `X-PAYMENT` header
+4. Retry with `PAYMENT-SIGNATURE` header
 5. Receive the paid response + settlement transaction
 
 ## Quick start

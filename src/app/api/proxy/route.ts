@@ -4,11 +4,11 @@ const SERVER_URL = "https://x402-server-production.up.railway.app";
 
 export async function GET(request: NextRequest) {
   const path = request.nextUrl.searchParams.get("path") || "/blockNumber";
-  const xPayment = request.headers.get("x-payment");
+  const paymentSig = request.headers.get("payment-signature");
 
   const headers: HeadersInit = {};
-  if (xPayment) {
-    headers["X-PAYMENT"] = xPayment;
+  if (paymentSig) {
+    headers["PAYMENT-SIGNATURE"] = paymentSig;
   }
 
   try {
@@ -18,10 +18,10 @@ export async function GET(request: NextRequest) {
     const responseHeaders = new Headers();
     responseHeaders.set("Content-Type", resp.headers.get("Content-Type") || "application/json");
 
-    // Forward the x-payment-response header if present
-    const paymentResponse = resp.headers.get("x-payment-response");
+    // Forward the payment-response header if present
+    const paymentResponse = resp.headers.get("payment-response");
     if (paymentResponse) {
-      responseHeaders.set("x-payment-response", paymentResponse);
+      responseHeaders.set("payment-response", paymentResponse);
     }
 
     return new NextResponse(body, {

@@ -118,7 +118,7 @@ export async function executePaymentFlow(
     { step: "Request protected endpoint", status: "active" },
     { step: "Receive 402 + payment requirements", status: "pending" },
     { step: "Sign EIP-712 payment authorization", status: "pending" },
-    { step: "Retry with X-PAYMENT header", status: "pending" },
+    { step: "Retry with PAYMENT-SIGNATURE header", status: "pending" },
     { step: "Receive paid response", status: "pending" },
   ];
 
@@ -213,7 +213,7 @@ export async function executePaymentFlow(
   const encoded = btoa(JSON.stringify(payload));
 
   const resp2 = await fetch(proxyUrl, {
-    headers: { "X-PAYMENT": encoded },
+    headers: { "PAYMENT-SIGNATURE": encoded },
   });
 
   update(3, {
@@ -234,7 +234,7 @@ export async function executePaymentFlow(
   }
 
   const responseData = await resp2.json();
-  const settlementHeader = resp2.headers.get("x-payment-response");
+  const settlementHeader = resp2.headers.get("payment-response");
   let settlement: SettleResponse | null = null;
   if (settlementHeader) {
     try {

@@ -218,7 +218,7 @@ export default function GatewayPage() {
       method,
       headers: {
         ...(body ? { "Content-Type": "application/json" } : {}),
-        "X-PAYMENT": encoded,
+        "PAYMENT-SIGNATURE": encoded,
       },
       body: body ? JSON.stringify(body) : undefined,
     });
@@ -231,7 +231,7 @@ export default function GatewayPage() {
     const response = await resp2.json();
     let txHash: string | undefined;
 
-    const settlementHeader = resp2.headers.get("x-payment-response");
+    const settlementHeader = resp2.headers.get("payment-response");
     if (settlementHeader) {
       try {
         const settlement = JSON.parse(atob(settlementHeader));
