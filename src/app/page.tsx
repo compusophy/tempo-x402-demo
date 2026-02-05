@@ -232,13 +232,19 @@ export default function Home() {
       {/* Info */}
       <div className="mt-12 text-xs text-zinc-600 text-center space-y-1">
         <p>
-          Powered by{" "}
+          <a
+            href="/docs"
+            className="underline hover:text-zinc-400"
+          >
+            Documentation
+          </a>{" "}
+          |{" "}
           <a
             href="https://crates.io/crates/tempo-x402"
             className="underline hover:text-zinc-400"
             target="_blank"
           >
-            tempo-x402
+            crates.io
           </a>{" "}
           |{" "}
           <a
