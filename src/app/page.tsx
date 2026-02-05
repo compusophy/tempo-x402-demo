@@ -229,6 +229,20 @@ export default function Home() {
         </a>
       )}
 
+      {/* Gateway link */}
+      <a
+        href="/gateway"
+        className="mt-8 w-full border border-zinc-800 rounded-lg p-4 hover:border-zinc-700 transition-colors block"
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-medium text-zinc-200">x402 Gateway</h3>
+            <p className="text-sm text-zinc-500">Add payment rails to any API</p>
+          </div>
+          <span className="text-zinc-600">→</span>
+        </div>
+      </a>
+
       {/* Info */}
       <div className="mt-12 text-xs text-zinc-600 text-center space-y-1">
         <p>
@@ -237,6 +251,13 @@ export default function Home() {
             className="underline hover:text-zinc-400"
           >
             Documentation
+          </a>{" "}
+          |{" "}
+          <a
+            href="/gateway"
+            className="underline hover:text-zinc-400"
+          >
+            Gateway
           </a>{" "}
           |{" "}
           <a

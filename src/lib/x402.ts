@@ -25,6 +25,8 @@ export const tempoModerato = {
 
 export const SCHEME_NAME = "tempo-tip20";
 export const SERVER_URL = "https://x402-server-production.up.railway.app";
+export const GATEWAY_URL = "https://x402-gateway-production-5018.up.railway.app";
+export const FACILITATOR_URL = "https://x402-facilitator-production-ec87.up.railway.app";
 export const PROXY_URL = "/api/proxy";
 export const EXPLORER_URL = "https://explore.moderato.tempo.xyz";
 
