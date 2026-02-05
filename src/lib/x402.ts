@@ -25,6 +25,7 @@ export const tempoModerato = {
 
 export const SCHEME_NAME = "tempo-tip20";
 export const SERVER_URL = "https://x402-server-production.up.railway.app";
+export const PROXY_URL = "/api/proxy";
 export const EXPLORER_URL = "https://explore.moderato.tempo.xyz";
 
 // Pre-funded demo key (testnet only)
@@ -126,9 +127,9 @@ export async function executePaymentFlow(
 
   onStep([...steps]);
 
-  // Step 1: Request the endpoint
-  const url = `${SERVER_URL}${endpoint}`;
-  const resp1 = await fetch(url);
+  // Step 1: Request the endpoint (via proxy to avoid CORS)
+  const proxyUrl = `${PROXY_URL}?path=${encodeURIComponent(endpoint)}`;
+  const resp1 = await fetch(proxyUrl);
 
   if (resp1.status !== 402) {
     update(0, {
@@ -138,7 +139,7 @@ export async function executePaymentFlow(
     return;
   }
 
-  update(0, { status: "done", data: { status: 402, url } });
+  update(0, { status: "done", data: { status: 402, url: `${SERVER_URL}${endpoint}` } });
 
   // Step 2: Parse 402 response
   const body: PaymentRequiredBody = await resp1.json();
@@ -209,7 +210,7 @@ export async function executePaymentFlow(
 
   const encoded = btoa(JSON.stringify(payload));
 
-  const resp2 = await fetch(url, {
+  const resp2 = await fetch(proxyUrl, {
     headers: { "X-PAYMENT": encoded },
   });
 
